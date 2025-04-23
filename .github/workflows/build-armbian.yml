@@ -22,21 +22,22 @@ on:
       armbian_board:
         description: "Select device board."
         required: false
-        default: "s905x"
+        default: "all"
         type: choice
         options:
           - all
+          - s905
           - s905x
           - s905x-b860h
           - s905x2
+          - s905x3
       armbian_kernel:
         description: "Select kernel version."
         required: false
-        default: "5.15.y"
+        default: "5.15.y_6.12.y"
         type: choice
         options:
           - 5.4.y
-          - 5.9.y
           - 5.10.y
           - 5.15.y
           - 6.1.y
@@ -44,8 +45,9 @@ on:
           - 6.12.y
           - 5.4.y_5.10.y
           - 5.15.y_6.1.y
-          - 6.6.y_6.12.y
+          - 6.1.y_6.12.y
           - 6.1.y_6.6.y
+          - 6.6.y_6.12.y
       auto_kernel:
         description: "Auto use the latest kernel."
         required: false
@@ -95,7 +97,7 @@ on:
           - anuneanu
 
 env:
-  TZ: America/New_York
+  TZ: Asia/Jakarta
   ROOTFS_SCRIPT: compile-kernel/tools/script/armbian_rootfs.sh
 
 jobs:
@@ -107,7 +109,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: main
+          ref: master
 
       - name: Initialization environment
         id: init
